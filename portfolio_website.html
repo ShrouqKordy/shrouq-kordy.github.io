@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shrouq Kordy | Data Engineer Portfolio</title>
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0a0d14',
+                        cardBg: 'rgba(18, 24, 36, 0.75)',
+                        cyanAccent: '#00f2fe',
+                        blueAccent: '#4facfe',
+                        purpleAccent: '#7f53ac'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background-color: #0a0d14;
+            color: #f1f5f9;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Full Page Snap Scroll Container */
+        .snap-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .snap-section {
+            height: 100vh;
+            min-height: 100vh;
+            scroll-snap-align: start;
+            scroll-snap-stop: always;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 5rem 1.5rem 2rem 1.5rem;
+            box-sizing: border-box;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(18, 24, 36, 0.75);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 242, 254, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(0, 242, 254, 0.15);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 20%, #00f2fe 70%, #4facfe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glow-effect {
+            box-shadow: 0 0 25px -5px rgba(0, 242, 254, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-slate-100 antialiased selection:bg-cyanAccent selection:text-black">
+
+    <!-- Fixed Header Navigation Bar -->
+    <nav class="fixed top-0 left-0 w-full z-50 glass-card border-b border-white/10 px-6 py-4 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#home" class="font-mono font-bold text-lg text-white flex items-center gap-2">
+                <span class="text-cyanAccent">&lt;SK/&gt;</span> Shrouq Kordy
+            </a>
+            
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center space-x-6 text-xs lg:text-sm font-medium text-slate-300">
+                <a href="#home" class="hover:text-cyanAccent transition-colors">1. Home</a>
+                <a href="#about" class="hover:text-cyanAccent transition-colors">2. About</a>
+                <a href="#skills" class="hover:text-cyanAccent transition-colors">3. Skills</a>
+                <a href="#projects" class="hover:text-cyanAccent transition-colors">4. Projects</a>
+                <a href="#education" class="hover:text-cyanAccent transition-colors">5. Education</a>
+                <a href="#certifications" class="hover:text-cyanAccent transition-colors">6. Achievements</a>
+                <a href="https://github.com/ShrouqKordy" target="_blank" class="hover:text-cyanAccent transition-colors flex items-center gap-1">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+                <a href="#contact" class="px-4 py-2 rounded-xl bg-gradient-to-r from-blueAccent to-cyanAccent text-black font-semibold hover:opacity-90 transition-all glow-effect">
+                    7. Let's Connect
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-slate-300 hover:text-white focus:outline-none">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden md:hidden mt-3 p-4 glass-card rounded-2xl flex flex-col space-y-3 text-sm">
+            <a href="#home" class="hover:text-cyanAccent py-1">1. Home</a>
+            <a href="#about" class="hover:text-cyanAccent py-1">2. About</a>
+            <a href="#skills" class="hover:text-cyanAccent py-1">3. Skills</a>
+            <a href="#projects" class="hover:text-cyanAccent py-1">4. Projects</a>
+            <a href="#education" class="hover:text-cyanAccent py-1">5. Education</a>
+            <a href="#certifications" class="hover:text-cyanAccent py-1">6. Achievements</a>
+            <a href="https://github.com/ShrouqKordy" target="_blank" class="text-cyanAccent font-semibold py-1 flex items-center gap-2">
+                <i class="fab fa-github"></i> GitHub Profile
+            </a>
+            <a href="#contact" class="text-cyanAccent font-semibold py-1">7. Let's Connect</a>
+        </div>
+    </nav>
+
+    <!-- Main Full-Page Snap Scroll Container -->
+    <div class="snap-container">
+
+        <!-- Page 1: Home / Hero Section -->
+        <section id="home" class="snap-section">
+            <div class="max-w-6xl w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+                <!-- Text Intro -->
+                <div class="flex-1 space-y-5 text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border border-cyanAccent/30 text-cyanAccent text-xs font-mono font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-cyanAccent animate-ping"></span> Data Engineering & Analytics Specialist
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight gradient-text">
+                        Shrouq Kordy
+                    </h1>
+                    
+                    <h2 class="text-xl sm:text-2xl font-mono text-blueAccent font-medium">
+                        Data Engineer / Analytics Engineer
+                    </h2>
+                    
+                    <p class="text-slate-400 text-base sm:text-lg max-w-xl leading-relaxed">
+                        Computer Science graduate specializing in building scalable ETL/ELT pipelines, optimizing data workflows, and transforming raw streams into actionable intelligence.
+                    </p>
+
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-4">
+                        <a href="#contact" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-blueAccent to-cyanAccent text-black font-semibold hover:shadow-lg hover:shadow-cyanAccent/20 transition-all flex items-center gap-2">
+                            <i class="fa-regular fa-paper-plane"></i> Contact Me
+                        </a>
+                        <a href="https://github.com/ShrouqKordy" target="_blank" class="px-7 py-3.5 rounded-xl glass-card text-white font-semibold hover:border-cyanAccent/50 transition-all flex items-center gap-2">
+                            <i class="fab fa-github text-cyanAccent"></i> GitHub Profile
+                        </a>
+                    </div>
+                </div>
+
+                <!-- ONLY AUTHORIZED PROFILE PICTURE -->
+                <div class="relative flex-shrink-0">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-cyanAccent to-purpleAccent rounded-3xl blur opacity-30"></div>
+                    <div class="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-2xl overflow-hidden glass-card p-2">
+                        <img src="profile.jpg" alt="Shrouq Kordy" class="w-full h-full object-cover rounded-xl" onerror="this.onerror=null; this.src='https://placehold.co/400x400/0a0d14/00f2fe?text=Shrouq+Kordy';">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 2: About -->
+        <section id="about" class="snap-section">
+            <div class="max-w-5xl w-full mx-auto">
+                <div class="text-center mb-10">
+                    <span class="text-cyanAccent font-mono text-xs font-semibold uppercase tracking-wider">01. Overview</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">About</h2>
+                    <div class="w-16 h-1 bg-gradient-to-r from-cyanAccent to-purpleAccent mx-auto mt-2 rounded-full"></div>
+                </div>
+
+                <div class="glass-card p-8 sm:p-10 rounded-2xl space-y-6 text-center md:text-left border border-white/10">
+                    <div class="flex items-center justify-center md:justify-start gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-cyanAccent/10 border border-cyanAccent/30 flex items-center justify-center text-cyanAccent text-xl">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">Data Analytics Engineer & CS Graduate</h3>
+                    </div>
+
+                    <p class="text-slate-300 leading-relaxed text-base sm:text-lg">
+                        Data Analytics Engineer and Computer Science graduate with strong expertise in Python, SQL, and data pipeline architectures. Possess a solid foundation in software engineering, enabling seamless data flow automation, warehouse modeling, and analytics infrastructure management.
+                    </p>
+
+                    <p class="text-slate-400 leading-relaxed text-sm sm:text-base">
+                        Equipped with intensive hands-on experience through the National Telecommunication Institute (NTI) in DataOps Engineering and Digital Egypt Pioneers Initiative (DEPI). Skilled in building scalable ETL workflows, containerizing environments with Docker, automating tasks via Apache Airflow, and driving operational business decisions through data.
+                    </p>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-white/10 text-center font-mono">
+                        <div class="p-3 bg-black/40 rounded-xl border border-white/5">
+                            <h4 class="text-cyanAccent font-bold text-lg">Python</h4>
+                            <p class="text-xs text-slate-400">Core & Automation</p>
+                        </div>
+                        <div class="p-3 bg-black/40 rounded-xl border border-white/5">
+                            <h4 class="text-blueAccent font-bold text-lg">SQL</h4>
+                            <p class="text-xs text-slate-400">PostgreSQL / MySQL</p>
+                        </div>
+                        <div class="p-3 bg-black/40 rounded-xl border border-white/5">
+                            <h4 class="text-cyanAccent font-bold text-lg">Airflow</h4>
+                            <p class="text-xs text-slate-400">Orchestration</p>
+                        </div>
+                        <div class="p-3 bg-black/40 rounded-xl border border-white/5">
+                            <h4 class="text-purpleAccent font-bold text-lg">Docker</h4>
+                            <p class="text-xs text-slate-400">Containers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 3: Technical Skills -->
+        <section id="skills" class="snap-section">
+            <div class="max-w-6xl w-full mx-auto">
+                <div class="text-center mb-10">
+                    <span class="text-cyanAccent font-mono text-xs font-semibold uppercase tracking-wider">02. Capabilities</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Technical Skills</h2>
+                    <div class="w-16 h-1 bg-gradient-to-r from-cyanAccent to-purpleAccent mx-auto mt-2 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Programming & Databases -->
+                    <div class="glass-card p-6 rounded-2xl border border-white/10">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i class="fa-solid fa-code text-cyanAccent text-xl"></i>
+                            <h3 class="text-lg font-bold text-white">Programming & Databases</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-cyanAccent">Python</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-slate-300">SQL</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-slate-300">PostgreSQL</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-slate-300">SQL Server</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-slate-300">MySQL</span>
+                        </div>
+                    </div>
+
+                    <!-- Data Operations & Big Data -->
+                    <div class="glass-card p-6 rounded-2xl border border-white/10">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i class="fa-solid fa-diagram-project text-blueAccent text-xl"></i>
+                            <h3 class="text-lg font-bold text-white">DataOps & Big Data</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-blueAccent">ETL/ELT Pipelines</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-slate-300">Apache Airflow</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-slate-300">Data Warehousing</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-slate-300">Hadoop & HDFS</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-slate-300">Spark / PySpark</span>
+                        </div>
+                    </div>
+
+                    <!-- Infrastructure & Visualization -->
+                    <div class="glass-card p-6 rounded-2xl border border-white/10">
+                        <div class="flex items-center gap-3 mb-4">
+                            <i class="fa-solid fa-chart-pie text-purpleAccent text-xl"></i>
+                            <h3 class="text-lg font-bold text-white">Tools & Visualization</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-purpleAccent">Docker</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-slate-300">Linux</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-slate-300">Git / GitHub</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-slate-300">Azure Services</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-slate-300">Power BI</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-slate-300">Tableau</span>
+                            <span class="px-3 py-1.5 rounded-lg bg-black/50 border border-white/10 text-xs font-mono text-slate-300">Microsoft Excel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 4: Key Projects -->
+        <section id="projects" class="snap-section">
+            <div class="max-w-6xl w-full mx-auto">
+                <div class="text-center mb-10">
+                    <span class="text-cyanAccent font-mono text-xs font-semibold uppercase tracking-wider">03. Practical Work</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Key Projects</h2>
+                    <div class="w-16 h-1 bg-gradient-to-r from-cyanAccent to-purpleAccent mx-auto mt-2 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Project 1 -->
+                    <div class="glass-card p-8 rounded-2xl border border-white/10 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold">
+                                    Graduation Project Grade: A
+                                </span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-3">AI-Powered Smart Video Surveillance System</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                                Engineered an automated real-time video surveillance analytics system using Python, Computer Vision (OpenCV), and Deep Learning to detect abnormal behaviors and dispatch automated security alerts with low latency.
+                            </p>
+                        </div>
+                        <a href="https://github.com/ShrouqKordy" target="_blank" class="inline-flex items-center gap-2 text-cyanAccent hover:underline font-mono text-sm font-semibold">
+                            <i class="fab fa-github"></i> View Code on GitHub <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="glass-card p-8 rounded-2xl border border-white/10 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 rounded-full bg-cyanAccent/10 border border-cyanAccent/30 text-cyanAccent font-mono text-xs font-bold">
+                                    DataOps Pipeline Project
+                                </span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-3">Automated Airflow ETL Data Workflows</h3>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">
+                                Designed, containerized, and scheduled automated data pipeline workflows using Apache Airflow, Docker, and PostgreSQL with robust error handling, monitoring, and validation.
+                            </p>
+                        </div>
+                        <a href="https://github.com/ShrouqKordy" target="_blank" class="inline-flex items-center gap-2 text-cyanAccent hover:underline font-mono text-sm font-semibold">
+                            <i class="fab fa-github"></i> View Repository on GitHub <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 5: Education -->
+        <section id="education" class="snap-section">
+            <div class="max-w-5xl w-full mx-auto">
+                <div class="text-center mb-10">
+                    <span class="text-cyanAccent font-mono text-xs font-semibold uppercase tracking-wider">04. Academic Background</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Education</h2>
+                    <div class="w-16 h-1 bg-gradient-to-r from-cyanAccent to-purpleAccent mx-auto mt-2 rounded-full"></div>
+                </div>
+
+                <div class="glass-card p-8 sm:p-10 rounded-2xl border border-white/10 max-w-3xl mx-auto space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Bachelor's Degree in Computer Science</h3>
+                            <p class="text-cyanAccent font-mono text-sm font-medium mt-1">Specialization: Software and Application Development</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-300 font-mono text-xs text-center">2022 - 2026</span>
+                    </div>
+
+                    <div class="space-y-2">
+                        <p class="text-slate-300 text-base">Faculty of Computer Science, Benha National University (BNU), Qalyubia, Egypt</p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-between">
+                        <span class="font-medium text-sm">Graduation Project Distinction:</span>
+                        <span class="font-mono font-bold text-base">Excellent (Grade A)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 6: Certifications & Achievements -->
+        <section id="certifications" class="snap-section">
+            <div class="max-w-6xl w-full mx-auto">
+                <div class="text-center mb-10">
+                    <span class="text-cyanAccent font-mono text-xs font-semibold uppercase tracking-wider">05. Recognition</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Certifications & Achievements</h2>
+                    <div class="w-16 h-1 bg-gradient-to-r from-cyanAccent to-purpleAccent mx-auto mt-2 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <!-- Cert 1 -->
+                    <div class="glass-card p-8 rounded-2xl border border-white/10 space-y-4">
+                        <span class="text-cyanAccent font-mono text-xs font-semibold">Oct 2026 – Jan 2027</span>
+                        <h3 class="text-xl font-bold text-white">DataOps Engineering Specialization</h3>
+                        <p class="text-blueAccent text-sm font-medium">National Telecommunication Institute (NTI HireReady)</p>
+                        <p class="text-slate-400 text-xs leading-relaxed pt-2 border-t border-white/10">
+                            Intensive hands-on training covering Apache Airflow, Docker containers, Linux, Azure cloud services, and data quality checks.
+                        </p>
+                    </div>
+
+                    <!-- Cert 2 -->
+                    <div class="glass-card p-8 rounded-2xl border border-white/10 space-y-4">
+                        <span class="text-purpleAccent font-mono text-xs font-semibold">Nov 2024 – May 2025</span>
+                        <h3 class="text-xl font-bold text-white">Data Analytics Trainee</h3>
+                        <p class="text-purpleAccent text-sm font-medium">Digital Egypt Pioneers Initiative (DEPI)</p>
+                        <p class="text-slate-400 text-xs leading-relaxed pt-2 border-t border-white/10">
+                            End-to-end analytics workflows, Python data science stack (Pandas, NumPy, Seaborn), Power BI, and Tableau dashboards.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 7: Contact ("Let's Connect") -->
+        <section id="contact" class="snap-section">
+            <div class="max-w-6xl w-full mx-auto">
+                <div class="text-center mb-10">
+                    <span class="text-cyanAccent font-mono text-xs font-semibold uppercase tracking-wider">06. Get In Touch</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Let's Connect</h2>
+                    <div class="w-16 h-1 bg-gradient-to-r from-cyanAccent to-purpleAccent mx-auto mt-2 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Info items -->
+                    <div class="space-y-4 lg:col-span-1">
+                        <a href="mailto:shrouk83959@gmail.com" class="glass-card p-5 rounded-2xl border border-white/10 flex items-center gap-4 hover:border-cyanAccent/50 transition-all">
+                            <div class="w-12 h-12 rounded-xl bg-cyanAccent/10 text-cyanAccent flex items-center justify-center text-lg">
+                                <i class="fa-regular fa-envelope"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-mono">Email</p>
+                                <p class="text-sm font-semibold text-white">shrouk83959@gmail.com</p>
+                            </div>
+                        </a>
+
+                        <a href="tel:+201226093840" class="glass-card p-5 rounded-2xl border border-white/10 flex items-center gap-4 hover:border-cyanAccent/50 transition-all">
+                            <div class="w-12 h-12 rounded-xl bg-blueAccent/10 text-blueAccent flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-mono">Phone</p>
+                                <p class="text-sm font-semibold text-white">(+20) 1226093840</p>
+                            </div>
+                        </a>
+
+                        <a href="https://github.com/ShrouqKordy" target="_blank" class="glass-card p-5 rounded-2xl border border-white/10 flex items-center gap-4 hover:border-cyanAccent/50 transition-all">
+                            <div class="w-12 h-12 rounded-xl bg-purpleAccent/10 text-purpleAccent flex items-center justify-center text-lg">
+                                <i class="fab fa-github"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-mono">GitHub Profile</p>
+                                <p class="text-sm font-semibold text-white">github.com/ShrouqKordy</p>
+                            </div>
+                        </a>
+
+                        <div class="glass-card p-5 rounded-2xl border border-white/10 flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-slate-400 font-mono">Location</p>
+                                <p class="text-sm font-semibold text-white">Cairo, Egypt</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="lg:col-span-2 glass-card p-8 rounded-2xl border border-white/10">
+                        <form id="contactForm" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-mono text-slate-300 mb-1">Your Name</label>
+                                    <input type="text" required placeholder="Name" class="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-cyanAccent text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-mono text-slate-300 mb-1">Your Email</label>
+                                    <input type="email" required placeholder="Email" class="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-cyanAccent text-sm">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono text-slate-300 mb-1">Subject</label>
+                                <input type="text" required placeholder="Subject Inquiry" class="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-cyanAccent text-sm">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-mono text-slate-300 mb-1">Message</label>
+                                <textarea rows="3" required placeholder="Write your message here..." class="w-full px-4 py-3 rounded-xl bg-black/50 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-cyanAccent text-sm"></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-blueAccent to-cyanAccent text-black font-bold hover:shadow-lg hover:shadow-cyanAccent/20 transition-all text-sm">
+                                Send Message <i class="fa-regular fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                        <div id="statusAlert" class="hidden mt-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs text-center font-mono">
+                            Thank you! Your message has been sent successfully.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Toggle mobile menu visibility
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Contact Form Submission Mock Action
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const alertBox = document.getElementById('statusAlert');
+            alertBox.classList.remove('hidden');
+            this.reset();
+            setTimeout(() => {
+                alertBox.classList.add('hidden');
+            }, 4000);
+        });
+    </script>
+</body>
+</html>
